@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="prabhash.testsClass.ECommerceTest">
+        <methods>
+          <include name="navigateToEmaniBrand"/>
+          <include name="productDetailsPageTest"/>
+          <include name="cartPageTest"/>
+          <include name="tearDownReport"/>
+          <include name="tearDown"/>
+          <include name="checkoutTest"/>
+          <include name="setup"/>
+          <include name="productListTest"/>
+          <include name="signUpTest"/>
+          <include name="setupReport"/>
+          <include name="placeOrderTest"/>
+          <include name="paymentPageTest"/>
+        </methods>
+      </class> <!-- prabhash.testsClass.ECommerceTest -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
