@@ -5,15 +5,10 @@
     <classes>
       <class name="prabhash.testsClass.ECommerceTest">
         <methods>
-          <include name="navigateToEmaniBrand"/>
           <include name="productDetailsPageTest"/>
-          <include name="cartPageTest"/>
           <include name="tearDownReport"/>
           <include name="tearDown"/>
-          <include name="checkoutTest"/>
           <include name="setup"/>
-          <include name="productListTest"/>
-          <include name="signUpTest"/>
           <include name="setupReport"/>
           <include name="placeOrderTest"/>
           <include name="paymentPageTest"/>

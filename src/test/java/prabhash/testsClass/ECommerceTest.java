@@ -9,6 +9,7 @@ import prabhash.utilsFiles.RandomDataUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -47,10 +48,11 @@ public class ECommerceTest {
 	}
 
 	@Test(priority = 2)
-	public void navigateToEmaniBrand() {
+	public void navigateToEmaniBrand() throws InterruptedException {
 		test = extent.createTest("Navigate to Emani Brand");
 
 		BrandPage brandPage = new BrandPage(driver);
+		Thread.sleep(1000);
 		brandPage.navigateToEmaniBrand();
 
 		test.pass("Navigated to Emani Brand successfully.");
@@ -112,6 +114,7 @@ public class ECommerceTest {
 
 		PaymentPage paymentPage = new PaymentPage(driver);
 
+		Thread.sleep(1000);
 		paymentPage.addNewCard();
 		paymentPage.enterCardDetails("Prabhash Kumar", "4242 4242 4242 4242", "111", "05", "2026");
 		paymentPage.confirmOrder();
