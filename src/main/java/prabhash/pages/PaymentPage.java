@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PaymentPage extends BasePage {
 
-	@FindBy(css = "#full_name")
+	@FindBy(id = "full_name")
 	private WebElement cardHolderName;
 
 	@FindBy(id = "month")
@@ -31,32 +31,37 @@ public class PaymentPage extends BasePage {
 	@FindBy(css = "button.button__link")
 	private WebElement addNewPaymentCard;
 
-	private By cardNumberIframe = By.id("spreedly-number-frame-1057");
-	private By cvvIframe = By.id("spreedly-cvv-frame-1057");
+	private By cardNumberIframe = By.xpath("//iframe[contains(@src, 'number-frame')]");
+	private By cvvIframe = By.xpath("//iframe[contains(@src, 'cvv-frame')]");
+
+	private WebDriverWait wait;
 
 	public PaymentPage(WebDriver driver) {
 		super(driver);
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
 	}
 
-	public void addNewCard() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	public void addNewCard() {
 		wait.until(ExpectedConditions.elementToBeClickable(addNewPaymentCard)).click();
-		Thread.sleep(1000);
 	}
 
 	public void enterCardDetails(String name, String cardNumber, String cvv, String month, String year) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
 		wait.until(ExpectedConditions.visibilityOf(cardHolderName)).sendKeys(name);
 
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(cardNumberIframe));
-		WebElement paycardNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("card_number")));
-		paycardNumber.sendKeys(cardNumber);
+		WebElement cardNumberIframeElement = wait.until(ExpectedConditions.presenceOfElementLocated(cardNumberIframe));
+		driver.switchTo().frame(cardNumberIframeElement);
+		WebElement cardNumberField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("card_number")));
+		cardNumberField.sendKeys(cardNumber);
 
 		driver.switchTo().defaultContent();
 
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(cvvIframe));
-		WebElement cardCVV = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cvv")));
-		cardCVV.sendKeys(cvv);
+		WebElement cvvIframeElement = wait.until(ExpectedConditions.presenceOfElementLocated(cvvIframe));
+		driver.switchTo().frame(cvvIframeElement);
+		WebElement cvvField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cvv")));
+		cvvField.sendKeys(cvv);
+
 		driver.switchTo().defaultContent();
 
 		wait.until(ExpectedConditions.visibilityOf(expiryMonth)).sendKeys(month);
@@ -66,10 +71,10 @@ public class PaymentPage extends BasePage {
 	}
 
 	public void confirmOrder() {
-		confirmOrderButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(confirmOrderButton)).click();
 	}
 
 	public void closeExclusiveDeals() {
-		exclusiveDealsCrossIcon.click();
+		wait.until(ExpectedConditions.elementToBeClickable(exclusiveDealsCrossIcon)).click();
 	}
 }

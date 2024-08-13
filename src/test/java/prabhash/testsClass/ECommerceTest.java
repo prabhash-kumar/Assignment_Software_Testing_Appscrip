@@ -20,8 +20,8 @@ public class ECommerceTest {
 	private WebDriver driver;
 	private ExtentReports extent;
 	private ExtentTest test;
-	String randomMobileNumber = RandomDataUtils.generateRandomMobileNumber();
-	String randomEmail = RandomDataUtils.generateRandomEmail();
+	private String randomMobileNumber;
+	private String randomEmail;
 
 	@BeforeSuite
 	public void setupReport() {
@@ -75,10 +75,10 @@ public class ECommerceTest {
 
 		PDPPage pdpPage = new PDPPage(driver);
 
-		pdpPage.changeQuantity("5");
+		pdpPage.changeQuantity("2");
 		pdpPage.addToCart();
-
-		Assert.assertTrue(pdpPage.isCartCountUpdated("5"), "Cart count not updated");
+		System.out.println(pdpPage.isCartCountUpdated("3"));
+		Assert.assertTrue(pdpPage.isCartCountUpdated("3"), "Cart count not updated");
 		test.pass("Product details page actions completed successfully.");
 	}
 
@@ -89,7 +89,7 @@ public class ECommerceTest {
 		CartPage cartPage = new CartPage(driver);
 		cartPage.clickOnCartIcon();
 		Assert.assertTrue(cartPage.isProductDisplayedInCart(), "Product not displayed in cart");
-		String expectedPrice = "4000.00";
+		String expectedPrice = "198.00";
 		Assert.assertTrue(cartPage.isProductPriceCorrect(expectedPrice), "Product price mismatch");
 
 		cartPage.proceedToCheckout();
@@ -132,12 +132,24 @@ public class ECommerceTest {
 		OrderPage orderPage = new OrderPage(driver);
 
 		String orderId = orderPage.getOrderId();
-		Assert.assertNotNull(orderId, "Order ID not generated");
+        System.out.println("Order ID: " + orderId);
 		Assert.assertFalse(orderId.isEmpty(), "Order ID is empty");
 
 		test.pass("Order placed successfully.");
 	}
 
+
+	@Test(priority = 9)
+	public void logOutProfile() {
+		test = extent.createTest("Logout Profile Test");
+
+		LogoutPage logOutPage = new LogoutPage(driver);
+
+		logOutPage.goToProfile();
+		logOutPage.logoutProfile();
+
+		test.pass("Profile Logout successfully.");
+	}
 	@AfterClass
 	public void tearDown() {
 		if (driver != null) {

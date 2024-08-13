@@ -22,7 +22,7 @@ public class PLPPage extends BasePage {
 	@FindBy(css = ".stroke")
 	private List<WebElement> productPrices;
 
-	@FindBy(xpath = "//*[text()='Apple iPhone 13 (128GB) DarkRed']")
+	@FindBy(xpath = "//*[text()='Perfect Skin Kit']")
 	private WebElement anyProduct;
 
 	public PLPPage(WebDriver driver) {

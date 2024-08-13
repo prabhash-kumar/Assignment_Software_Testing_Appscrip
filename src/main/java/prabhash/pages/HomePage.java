@@ -11,11 +11,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
 
-	@FindBy(className = "join_btn")
+	@FindBy(xpath = "//span[text()='Log In To Get Free Talents']")
+	private WebElement forlogin;
+
+	@FindBy(css = "span.jsx-3199853284")
 	private WebElement signUpButton;
 
 	@FindBy(id = "regPhoneInput")
 	private WebElement mobile_Number;
+
 	@FindBy(css = "input[type='checkbox'][class='jsx-2520378272']")
 	private WebElement termsCheckbox;
 
@@ -44,7 +48,7 @@ public class HomePage extends BasePage {
 	public void signUp(String phone, String firstName, String lastName, String email, String otp)
 			throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+		wait.until(ExpectedConditions.elementToBeClickable(forlogin)).click();
 		wait.until(ExpectedConditions.elementToBeClickable(signUpButton)).click();
 		wait.until(ExpectedConditions.elementToBeClickable(termsCheckbox)).click();
 		wait.until(ExpectedConditions.visibilityOf(mobile_Number)).sendKeys(phone);
@@ -61,7 +65,7 @@ public class HomePage extends BasePage {
 
 		wait.until(ExpectedConditions.elementToBeClickable(emailField)).sendKeys(email);
 
-		 wait.until(ExpectedConditions.elementToBeClickable(doneButton)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(doneButton)).click();
 
 	}
 

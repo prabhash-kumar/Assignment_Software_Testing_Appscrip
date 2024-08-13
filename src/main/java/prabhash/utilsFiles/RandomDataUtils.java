@@ -8,7 +8,7 @@ public class RandomDataUtils {
 
     public static String generateRandomMobileNumber() {
         Random random = new Random();
-        StringBuilder mobileNumber = new StringBuilder("7"); 
+        StringBuilder mobileNumber = new StringBuilder("9"); 
         for (int i = 0; i < 9; i++) {
             mobileNumber.append(random.nextInt(10));
         }

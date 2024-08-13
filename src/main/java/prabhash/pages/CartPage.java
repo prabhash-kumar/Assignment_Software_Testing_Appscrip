@@ -12,7 +12,7 @@ public class CartPage extends BasePage {
 
 	@FindBy(xpath = "//a[@href=\"/cart\"]")
 	private WebElement cartIcon;
-	@FindBy(xpath = "//*[text()='Apple iPhone 13 (128GB) DarkRed']")
+	@FindBy(xpath = "//*[text()='Perfect Skin Kit']")
 	private WebElement productInCart;
 
 	@FindBy(css = ".total_price.ml-auto")
@@ -21,11 +21,13 @@ public class CartPage extends BasePage {
 	@FindBy(xpath = "//a[@href='/shipping-address']")
 	private WebElement checkoutButton;
 
+	private WebDriverWait wait;
 	public CartPage(WebDriver driver) {
 		super(driver);
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 	}
 
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 	public void clickOnCartIcon() {
 		cartIcon.click();
